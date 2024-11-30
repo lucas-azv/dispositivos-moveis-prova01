@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Button, FlatList } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TaskList from './components/TaskList';
 import TaskForm from './components/TaskForm';
 

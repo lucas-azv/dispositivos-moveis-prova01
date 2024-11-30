@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, RadioButton } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
+import { RadioButton } from 'react-native-paper'; // Certifique-se de ter instalado a biblioteca react-native-paper
 
 const TaskForm = ({ onSubmit, editingTask }) => {
   const [name, setName] = useState('');
@@ -43,24 +44,16 @@ const TaskForm = ({ onSubmit, editingTask }) => {
         style={styles.input}
       />
       <View style={styles.radioGroup}>
-        <RadioButton
-          value="Alta"
-          status={priority === 'Alta' ? 'checked' : 'unchecked'}
-          onPress={() => setPriority('Alta')}
-        />
-        <Text>Alta</Text>
-        <RadioButton
-          value="Média"
-          status={priority === 'Média' ? 'checked' : 'unchecked'}
-          onPress={() => setPriority('Média')}
-        />
-        <Text>Média</Text>
-        <RadioButton
-          value="Baixa"
-          status={priority === 'Baixa' ? 'checked' : 'unchecked'}
-          onPress={() => setPriority('Baixa')}
-        />
-        <Text>Baixa</Text>
+        {['Alta', 'Média', 'Baixa'].map((level) => (
+          <View key={level} style={styles.radioContainer}>
+            <RadioButton
+              value={level}
+              status={priority === level ? 'checked' : 'unchecked'}
+              onPress={() => setPriority(level)}
+            />
+            <Text>{level}</Text>
+          </View>
+        ))}
       </View>
       <Button title={editingTask ? "Atualizar Tarefa" : "Adicionar Tarefa"} onPress={handleSubmit} />
     </View>
@@ -81,6 +74,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
+  },
+  radioContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
